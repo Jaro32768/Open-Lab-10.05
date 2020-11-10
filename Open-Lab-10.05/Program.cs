@@ -1,6 +1,7 @@
 ﻿using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,7 +17,10 @@ namespace Open_Lab_10._01
             Book LOTR = new Book("Creative name of book", -100, "encyclopedia", "Jaro", 2020);
             Book LOTR2 = new Book("Another creative name of book", 25);
             Book LOTR3 = new Book();
-            Book HOBIT = new Book("HOBIT", 310, "fantasy", "Tolkien", 2020);
+            Book HOBIT = new Book("HOBIT", 310, "fantasy", "Tolkien", 2020)
+            {
+                Category = Book.categoryList[4]
+            };
             LOTR.GetBook();
             LOTR2.GetBook();
             LOTR3.GetBook();
@@ -31,6 +35,11 @@ namespace Open_Lab_10._01
         private string category;
         private string author;
         private int releaseDate;
+        /// <summary>
+        /// List of available categories.
+        /// </summary>
+        public static List<string> categoryList = new List<string>();
+        
         public Book(string title, int pages, string category, string author, int releaseDate)
         {
             Title = title;
@@ -38,6 +47,11 @@ namespace Open_Lab_10._01
             Category = category;
             Author = author;
             ReleaseDate = releaseDate;
+            categoryList.Add("children's");
+            categoryList.Add("romantic");
+            categoryList.Add("educational");
+            categoryList.Add("sci-fi");
+            categoryList.Add("adventure");
         }
         public Book(string title, int pages)
         {
@@ -55,6 +69,9 @@ namespace Open_Lab_10._01
             Author = "-1";
             ReleaseDate = -1;
         }
+        /// <summary>
+        /// Property, that set up a title of book.
+        /// </summary>
         public string Title
         {
             get => this.title;
@@ -63,7 +80,9 @@ namespace Open_Lab_10._01
                 this.title = value;
             }
         }
-
+        /// <summary>
+        /// Property, that set up a number of pages in book.
+        /// </summary>
         public int Pages
         {
             get => this.pages;
@@ -76,16 +95,19 @@ namespace Open_Lab_10._01
                 }
             }
         }
-
+        /// <summary>
+        /// Property, that set up a category of book.
+        /// </summary>
         public string Category
         {
-            get => this.category;
             set
             {
                 this.category = value;
             }
         }
-
+        /// <summary>
+        /// Property, that set up an author of book.
+        /// </summary>
         public string Author
         {
             get => this.author;
@@ -94,7 +116,9 @@ namespace Open_Lab_10._01
                 this.author = value;
             }
         }
-
+        /// <summary>
+        /// Property, that set up release date of book.
+        /// </summary>
         public int ReleaseDate
         {
             get => this.releaseDate;
